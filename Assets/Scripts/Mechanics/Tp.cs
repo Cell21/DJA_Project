@@ -11,6 +11,10 @@ public class Tp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        player.transform.position = new Vector3(tp.transform.position.x, tp.transform.position.y, tp.transform.position.z);
+        if (other.gameObject.CompareTag("Ball")) 
+        {
+            Debug.Log("Hello");
+            player.transform.position = new Vector3(tp.transform.position.x, tp.transform.position.y, tp.transform.position.z);
+        }       
     }
 }
