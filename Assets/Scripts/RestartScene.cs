@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class RestartScene : MonoBehaviour
+{
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.R) || transform.position.y <= -10)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    } 
+}
