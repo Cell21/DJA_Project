@@ -8,6 +8,10 @@ public class Laser : MonoBehaviour
     public Collider laserCollider;
     public float timeToTurnOn = 1;
     public float timeToTurnOff = 1;
+    public bool turnOffWithObstacle = false;
+    public bool isTurnedOn = true;
+    public LayerMask invisibleLayer;
+
 
     private void Start()
     {
@@ -18,15 +22,41 @@ public class Laser : MonoBehaviour
     {
         while (true)
         {
-            laserMeshRenderer.enabled = true;
-            laserCollider.enabled = true;
+            if (isTurnedOn) 
+            {
+                laserMeshRenderer.enabled = true;
+                laserCollider.enabled = true;
+            }
+            
 
             yield return new WaitForSeconds(timeToTurnOff);
 
-            laserMeshRenderer.enabled = false;
-            laserCollider.enabled = false;
-
+            if (isTurnedOn) 
+            {
+                laserMeshRenderer.enabled = false;
+                laserCollider.enabled = false;
+            }
+            
             yield return new WaitForSeconds(timeToTurnOn);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Default") && turnOffWithObstacle) 
+        {
+            gameObject.layer = invisibleLayer;
+            isTurnedOn = false;
+            Debug.Log("Ola");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Default"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Laser");
+            isTurnedOn = true;
         }
     }
 }
