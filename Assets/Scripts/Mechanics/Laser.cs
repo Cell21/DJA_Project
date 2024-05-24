@@ -45,7 +45,8 @@ public class Laser : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Default") && turnOffWithObstacle) 
         {
-            gameObject.layer = invisibleLayer;
+            int invisibleLayerIndex = Mathf.RoundToInt(Mathf.Log(invisibleLayer.value, 2));
+            gameObject.layer = invisibleLayerIndex;
             isTurnedOn = false;
             Debug.Log("Ola");
         }
@@ -55,6 +56,7 @@ public class Laser : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Default"))
         {
+            Debug.Log("Xau");
             gameObject.layer = LayerMask.NameToLayer("Laser");
             isTurnedOn = true;
         }
