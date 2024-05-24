@@ -18,7 +18,11 @@ public class RestartScene : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Laser"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (other.gameObject.GetComponent<Laser>().isTurnedOn) 
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            
         }
     }
 }
