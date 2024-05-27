@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Win : MonoBehaviour
 {
+    public string levelName;
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the collision is with the ball
-        if (other.gameObject.CompareTag("Ball"))
-        {
-            Debug.Log("You win!");
-        }
+        // Salvar o progresso do jogador
+        SaveLoadManager.Instance.SaveProgress(levelName);
+        Debug.Log("Level " + levelName + " completed!");
+        SceneManager.LoadScene("LevelSelection");
     }
 }
