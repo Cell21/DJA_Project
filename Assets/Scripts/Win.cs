@@ -8,6 +8,8 @@ public class Win : MonoBehaviour
     public string levelName;
     private void OnTriggerEnter(Collider other)
     {
+        //Som de vitória
+        FindObjectOfType<AudioManager>().PlaySound("Win");
         // Salvar o progresso do jogador
         SaveLoadManager.Instance.SaveProgress(levelName);
         Debug.Log("Level " + levelName + " completed!");
